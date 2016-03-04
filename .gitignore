@@ -1,0 +1,3 @@
+# Ignore .o and .a
+*.[oa]
+core
