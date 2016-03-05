@@ -1,3 +1,4 @@
 # Ignore .o and .a
 *.[oa]
+a.out
 core

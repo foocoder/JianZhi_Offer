@@ -16,7 +16,7 @@ using namespace std;
 
 class Solution{
     public:
-        void replaceSpace(char *str, int length){
+        void replaceSpace1(char *str, int length){//MySolution, external space needed
             vector<char *> vecStr;
             char *replaceSpace = new char[3*length];
             char space[] = "%20";
@@ -37,6 +37,29 @@ class Solution{
                 pointerToStr += strlen(i);
             }
             strcpy(str, replaceSpace);
+        }
+
+        void replaceSpace(char *str, int length){//book version, back tracking.
+            int numofSpace = 0;
+            length = strlen(str);
+            for(int i=0; str[i]!='\0'; i++){
+                if(str[i]==' '){
+                    numofSpace ++;
+                }
+            }
+            int newStrLength = length+2*numofSpace;
+            for(int i=length; i>=0; ){
+                if(str[i]!=' '){
+                    str[newStrLength--] = str[i--];
+                }
+                else{
+                    str[newStrLength--] = '0';
+                    str[newStrLength--] = '2';
+                    str[newStrLength--] = '%';
+                    i--;
+                }
+
+            }
         }
 };
 
