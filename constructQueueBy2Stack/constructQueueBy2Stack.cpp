@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <stack>
+#include <queue>
 #include <cstring>
 #include <sstream>
 
@@ -56,9 +57,49 @@ private:
     stack<int> stack2;
 };
 
+class Solution1{//construct stack by 2 queue
+public:
+    void push(int node){
+        if(!queue1.empty()){
+            queue1.push(node);
+        }
+        else{
+            queue2.push(node);
+        }
+    }
+
+    int pop(){
+        int popNum;
+        queue<int> * masterQueue;
+        queue<int> * secondQueue;
+        if(!queue1.empty()){
+            masterQueue = & queue1;
+            secondQueue = & queue2;
+        }
+        else if(!queue2.empty()){
+            masterQueue = & queue2;
+            secondQueue = & queue1;
+        }
+        else if(queue1.empty() && queue2.empty()){
+            return -1;
+        }
+        while(masterQueue->size()>1){
+            secondQueue->push(masterQueue->front());
+            masterQueue->pop();
+        }
+        popNum = masterQueue->front();
+        masterQueue->pop();
+        return popNum;
+    }
+
+private:
+    queue<int> queue1;
+    queue<int> queue2;
+};
+
 int main(int argc, char *argv[])
 {
-    Solution test;
+    Solution1 test;
     string line;
     while(getline(cin, line)){
         istringstream lineStream(line);
