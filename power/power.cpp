@@ -1,0 +1,62 @@
+// ---- Program Info Start----
+//FileName:     power.cpp
+//
+//Author:       Fuchen Duan
+//
+//Email:        slow295185031@gmail.com
+//
+//CreatedAt:    2016-03-09 22:13:19
+// ---- Program Info End  ----
+
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+class Solution {
+public:
+    double Power0(double base, int exponent) {//O(n) version
+        if(exponent == 0)
+            return 1;
+        else
+            return exponent > 0 ? (base * Power0(base, exponent-1)) : ((double) 1)/(base * Power0(base, -exponent - 1));
+    }
+
+    double Power(double base, int exponent) {//O(log(n)) version
+        if(exponent == 0)
+            return 1;
+        else
+        {
+            double result;
+            double half = exponent > 0 ? Power(base, exponent>>1) : Power(base, -exponent>>1);
+            result = half*half;
+            if(exponent & 1)
+                result  *= base;
+            return exponent > 0 ? result: ((double)1)/result;
+        }
+    }
+};
+
+int main(int argc, char *argv[])
+{
+    Solution test;
+    clock_t start, end;
+    start = clock();
+    //for(int i=0; i<10 ; i++){
+        //cout<<i<<" 0 pow:"<<test.Power(i, 0)<<endl;
+        //cout<<i<<" 1 pow:"<<test.Power(i, 1)<<endl;
+        //cout<<i<<" 2 pow:"<<test.Power(i, 2)<<endl;
+        //cout<<i<<" 3 pow:"<<test.Power(i, 3)<<endl;
+    //}
+    for(int i=-10; i<10; i++)
+        cout<<test.Power0(2,i)<<",";
+    end = clock();
+    cout<<"\ntime:"<<(end-start)<<endl;
+    start = clock();
+    for(int i=-10; i<10; i++)
+        cout<<test.Power(2,i)<<".";
+    end = clock();
+    cout<<"\ntime:"<<(end-start)<<endl;
+
+    return 0;
+}
