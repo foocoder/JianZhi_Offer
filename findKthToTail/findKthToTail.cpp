@@ -20,7 +20,7 @@ struct ListNode {
 
 class Solution {
     public:
-        ListNode* FindKthToTail(ListNode* pListHead, unsigned int k) {
+        ListNode* FindKthToTail0(ListNode* pListHead, unsigned int k) {//Two Traverse, caculate pos = len-k;
             int len = 0, pos;
             ListNode * p = pListHead;
             while(p != NULL){
@@ -37,6 +37,22 @@ class Solution {
             }
             return p;
         }
+
+        ListNode* FindKthToTail(ListNode* pListHead, unsigned int k) {//One Traverse, Two Pointer
+            if(pListHead == NULL) return NULL;
+            ListNode * p1 = pListHead, * p2 = pListHead;
+            while(k && (p1 !=NULL)){
+                p1 = p1->next;
+                k--;
+            }
+            if(k) return NULL;//k is greater then length of List;
+            while(p1 !=NULL )
+            {
+                p1 = p1->next;
+                p2 = p2->next;
+            }
+            return p2;
+        }
 };
 
 
@@ -49,14 +65,21 @@ int main(int argc, char *argv[])
         p->next = pListMem;
         p = pListMem;
     }
-
     Solution test;
-    for(int i=6; i<7; i++){
+    for(int i=1; i<7; i++){
         p = test.FindKthToTail(pListHead, i);
         if(p!=NULL)
             cout<<p->val<<" ";
         else
             cout<<"NULL"<<" ";
+    }
+
+    p = pListHead;
+    for(int i=0; i<6; i++)
+    {
+        ListNode * pTmp = p->next;
+        delete p;
+        p = pTmp;
     }
     return 0;
 }
