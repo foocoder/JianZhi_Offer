@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
 
 using namespace std;
 
@@ -25,6 +26,19 @@ class Solution {
         vector<int> PrintFromTopToBottom(TreeNode *root) {
             vector<int> vecResult;
             if(root == NULL) return vecResult;
+            deque<TreeNode *> nodeQueue;
+            TreeNode * p = root;
+            nodeQueue.push_back(p);
+            while(!nodeQueue.empty()){
+                p = nodeQueue.front();
+                nodeQueue.pop_front();
+                if(p!=NULL) {
+                    vecResult.push_back(p->val);
+                    nodeQueue.push_back(p->left);
+                    nodeQueue.push_back(p->right);
+                }
+            }
+            return vecResult;
         }
 };
 
