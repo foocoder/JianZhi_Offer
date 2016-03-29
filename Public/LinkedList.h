@@ -21,17 +21,17 @@ struct ListNode {
     }
 };
 
-class ListNodeClass{
+class ListClass{
     //The Head Node is -1;
     ListNode * pListHead;
     public:
     //Constructor
-    ListNodeClass():pListHead(new ListNode(-1)){
+    ListClass():pListHead(new ListNode(-1)){
         #ifdef DEBUG
         std::cout<<"Default"<<std::endl;
         #endif
     }
-    ListNodeClass(const std::vector<int> &vec):pListHead(new ListNode(-1)){
+    ListClass(const std::vector<int> &vec):pListHead(new ListNode(-1)){
         if(vec.empty()) return;
         ListNode * p = pListHead;
         for(auto i:vec){
@@ -45,14 +45,14 @@ class ListNodeClass{
     }
 
     //Copy Constructor
-    ListNodeClass(const ListNodeClass & rhs):pListHead(rhs.pListHead){
+    ListClass(const ListClass & rhs):pListHead(rhs.pListHead){
         #ifdef DEBUG
         std::cout<< "Copy"<<std::endl;
         #endif
     }
 
     //Assign Function
-    ListNodeClass & operator=(const ListNodeClass & rhs){
+    ListClass & operator=(const ListClass & rhs){
         //Check self Assignment
         if(&rhs == this){
             return *this;
@@ -84,7 +84,7 @@ class ListNodeClass{
     }
 
     //Destructor
-    ~ListNodeClass(){
+    ~ListClass(){
         while(pListHead != NULL){
             ListNode * pTmp = pListHead;
             pListHead = pListHead->next;
