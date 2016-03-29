@@ -45,7 +45,19 @@ class Solution{
                 flag &= Verify_Iter_of_BST(first, iter-1);
             }
             return flag;
+        }
 
+        bool VerfiySquenceOfBST(const vector<int> & sequence){//Non-Recursive Version
+            int n = sequence.size();
+            int i = 0;
+            if(!n) return false;
+            while(--n){
+                while(sequence[i]<sequence[n]) i++;
+                while(sequence[i]>sequence[n]) i++;
+                if(i<n) return false;
+                i = 0;
+            }
+            return true;
         }
 };
 
@@ -53,7 +65,7 @@ class Solution{
 int main(int argc, char *argv[])
 {
     Solution test;
-    vector<int> seq{2,6,3,7,6,10,9,12,13,11,8,5};
-    cout<<test.VerifySquenceofBST(seq);
+    vector<int> seq{2,8,3,7,6,10,9,12,13,11,8,5};
+    cout<<test.VerfiySquenceOfBST(seq);
     return 0;
 }
