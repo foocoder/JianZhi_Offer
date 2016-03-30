@@ -11,6 +11,7 @@
 #
 #CreatedAt:    2016-03-29 19:01:00
 ## ---- Program Info End  ----
+set -x
 
 git add -A
 git commit -m "$1"
