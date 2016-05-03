@@ -21,14 +21,19 @@ struct TreeNode {
 class BinaryTreeClass{
     TreeNode * root;
     public:
-    //Constructor
-    BinaryTreeClass(){}
-    //Copy Constructor
-    BinaryTreeClass(const BinaryTreeClass & rhs){}
-    //Assign Operator
-    BinaryTreeClass & operator=(const BinaryTreeClass & rhs){}
-    //Destructor
-    ~BinaryTreeClass(){}
+        //Constructor
+        BinaryTreeClass();
+        //Copy Constructor
+        BinaryTreeClass(const BinaryTreeClass & rhs);
+        //Assign Operator
+        BinaryTreeClass & operator=(const BinaryTreeClass & rhs);
+        //Destructor
+        ~BinaryTreeClass();
+
+        //Private Interface: Recursive Copy
+        void RecursiveCopyNode(TreeNode * lhs, TreeNode * rhs);
+        //Private Interface: Recursive Delete
+        void RecursiveDeleteNode(TreeNode * rhs);
 
 };
 
